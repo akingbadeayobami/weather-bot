@@ -1,5 +1,7 @@
 "use strict";
-const Chat = require('../models').Chat;
+const Chat = require('../models').Chat,
+    botController = require('./bot'),
+    messageBy = require('../enums').MessageBy;
 
 /** @namespace chatController */
 const chatController = {
@@ -14,13 +16,15 @@ const chatController = {
      */
     getHistory(req, res) {
 
-        let history = [{
-            created_at: "Yesterday",
-            message: "I am rock"
-        }];
+        Chat.find().distinct('history_id', function(err, chats) {
+            if (err) return next(err);
 
-        res.status(201).send({
-            history: history,
+            // Do Some mapp to get the last date and messgae of the chat
+
+            res.status(200).send({
+                chats: chats
+            });
+
         });
 
     },
@@ -38,11 +42,7 @@ const chatController = {
         Chat.find({ history_id: req.params.history_id }, function(err, chat) {
             if (err) return next(err);
 
-            // object of the user
-            console.log(chat);
-
-            res.status(201).send({
-                status: true,
+            res.status(200).send({
                 chat: chat
             });
 
@@ -55,7 +55,7 @@ const chatController = {
 
     /**
      * @name postMessage
-     * @description Process Chat Message And Give a response
+     * @description Saves Message, Get Bot Response, Save The reponse and return message to user
      * @param {object} req - Express Request Object
      * @param {string} req.body.message - Chat Message
      * @param {number} req.body.history_id - Chat History ID
@@ -65,24 +65,30 @@ const chatController = {
     postMessage(req, res) {
 
         Chat.create({
-            message: 'I am rock',
-            history_id: '1',
-            message_by: '1'
+            message: req.body.message,
+            history_id: req.body.history_id,
+            message_by: messageBy.USER.value
         }, function(err, created) {
 
-            console.log(err);
+            if (err) return next(err);
 
-            if (err) throw err;
+            botController.getWeather(req.body.message).then(message => {
 
-            console.log(created);
+                Chat.create({
+                    message: message,
+                    history_id: req.body.history_id,
+                    message_by: messageBy.BOT.value
+                });
 
-            console.log('User created!');
+                res.status(200).send({
+                    status: true,
+                    message: message
+                });
 
-            let message = "sdsd";
+            }).catch(error => {
 
-            res.status(201).send({
-                status: true,
-                message: message
+                return next(err);
+
             });
 
         });
