@@ -6,25 +6,15 @@ require('dotenv').config({
 module.exports = {
 
     "development": {
-        "storage": "./express/data/db-dev.db",
-        "dialect": "sqlite",
-        "logging": false
+        "storage": process.env.DB_USER
     },
 
     "production": {
-        "username": process.env.DB_USER,
-        "password": process.env.DB_PASS,
-        "database": "auction",
-        "host": process.env.DB_HOST,
-        "port": process.env.DB_PORT,
-        "dialect": "mysql",
-        "logging": false
+        "username": process.env.DB_USER
     },
 
     "test": {
-        "storage": "./express/data/db-test.db",
-        "dialect": "sqlite",
-        "logging": false
+        "storage": process.env.DB_USER
     }
 
 };

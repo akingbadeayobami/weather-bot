@@ -4,9 +4,9 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const index = require('./express/routes/index');
-const chat = require('./express/routes/chat');
-const bot = require('./express/routes/bot');
+const index = require('./server/routes/index');
+const chat = require('./server/routes/chat');
+const bot = require('./server/routes/bot');
 const cors = require('cors');
 require('dotenv').config({
     path: path.join(__dirname, '../.env')
