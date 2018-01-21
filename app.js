@@ -4,13 +4,16 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+
+const cors = require('cors');
+
 const index = require('./server/routes/index');
 const chat = require('./server/routes/chat');
-const bot = require('./server/routes/bot');
-const cors = require('cors');
+
 require('dotenv').config({
     path: path.join(__dirname, '../.env')
 });
+
 
 var app = express();
 
@@ -30,7 +33,6 @@ app.use(express.static(path.join(__dirname, './client/build')));
 
 app.use('/api', index);
 app.use('/api/chat', chat);
-app.use('/api/bot', bot);
 
 
 // catch 404 and forward to error handler

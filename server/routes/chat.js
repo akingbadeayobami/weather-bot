@@ -1,10 +1,12 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
+const chatController = require('../controllers').chat;
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-    res.send({ title: 'Weather Bot' });
-});
+router.get('/history', chatController.getHistory);
+
+router.get('/messages/:history_id', chatController.getChatMessages);
+
+router.post('/', chatController.postMessage);
 
 module.exports = router;

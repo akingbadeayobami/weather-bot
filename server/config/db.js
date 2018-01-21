@@ -6,15 +6,15 @@ require('dotenv').config({
 module.exports = {
 
     "development": {
-        "storage": process.env.DB_USER
+        "storage": process.env.MONGODB_URL
     },
 
     "production": {
-        "username": process.env.DB_USER
+        "storage": process.env.MONGODB_URL
     },
 
     "test": {
-        "storage": process.env.DB_USER
+        "storage": process.env.MONGODB_URL
     }
 
 };

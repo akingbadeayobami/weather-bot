@@ -23,9 +23,11 @@
         "cors": "^2.8.4",
         "debug": "^3.1.0",
         "dotenv": "^4.0.0",
+        "enum": "^2.5.0",
         "express": "^4.16.2",
         "jade": "^1.11.0",
         "lodash": "^4.17.4",
+        "mongoose": "^5.0.1",
         "morgan": "^1.9.0"
     },
     "devDependencies": {
