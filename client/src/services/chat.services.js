@@ -12,6 +12,14 @@ function getChatMessages(history_id) {
 
 }
 
+
+function getLastChatMessages() {
+
+    return axios.get('chat/messages/last');
+
+}
+
+
 function postMessage(message, history_id) {
 
     return axios.post('chat/', {
@@ -25,4 +33,5 @@ export {
     getHistory,
     getChatMessages,
     postMessage,
+    getLastChatMessages
 };

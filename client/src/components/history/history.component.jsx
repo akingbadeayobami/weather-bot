@@ -31,7 +31,7 @@ class History extends Component {
 
                                 {
                                     this.props.history.history.map(chat => 
-                                        <li>
+                                        <li key={chat.id}>
                                             <a  onClick={this.getChatMessages.bind(this,chat.id)} >
                                                 <strong><p>{chat.date}</p></strong>
                                                 <p> {chat.message} </p>

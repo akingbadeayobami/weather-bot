@@ -49,14 +49,36 @@ const chatController = {
      */
     getChatMessages(req, res, next) {
 
-        Chat.find({ history_id: req.params.history_id }, function(err, chat) {
+        Chat.find({history_id : req.params.history_id },function(err, chat) {
+
             if (err) return next(err);
-
+                        
             res.status(200).send(chat);
-
+          
         });
 
+    },
 
+    getLastChatHistory(req, res, next){
+
+        Chat.findOne().sort('-created_at').exec(function(err, chat) {
+
+            let history_id;
+
+            if (err) return next(err);
+
+            if(!chat){
+                history_id = 0;
+            }else{
+                history_id = chat.history_id;
+            }
+            
+            req.params.history_id = history_id;
+
+            next();
+
+
+        });
 
     },
 

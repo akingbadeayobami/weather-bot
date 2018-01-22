@@ -14,6 +14,21 @@ const getChatMessages = (history_id) => {
 
 };
 
+const getLastChatMessages = () => {
+
+    return dispatch => {
+        chatServices.getLastChatMessages().then(response => {
+            dispatch({
+                type: chatConstants.GET_CHAT_MESSAGES,
+                payload: response.data
+            });
+        });
+    };
+
+};
+
+
+
 const postMessage = (message, history_id) => {
 
     return dispatch => {
@@ -45,5 +60,6 @@ const addUserMessage = (message, history_id) => {
 export {
     getChatMessages,
     postMessage,
-    addUserMessage
+    addUserMessage,
+    getLastChatMessages
 }

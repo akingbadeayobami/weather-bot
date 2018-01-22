@@ -5,6 +5,8 @@ const chatController = require('../controllers').chat;
 
 router.get('/history', chatController.getHistory);
 
+router.get('/messages/last', chatController.getLastChatHistory, chatController.getChatMessages);
+
 router.get('/messages/:history_id', chatController.getChatMessages);
 
 router.post('/', chatController.postMessage);
