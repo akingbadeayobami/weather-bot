@@ -1,11 +1,12 @@
-import axios from "./axios";
+const historyConstants = require("../constants/history.constants");
+const chatServices = require("../services/chat.services");
 
 const getHistory = () => {
 
     return dispatch => {
-        axios.get('history/get').then(response => {
+        chatServices.getHistory().then(response => {
             dispatch({
-                type: "GET_HISTORY",
+                type: historyConstants.GET_HISTORY,
                 payload: response.data
             });
         });

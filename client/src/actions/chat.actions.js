@@ -1,11 +1,12 @@
-import axios from "./axios";
+const chatConstants = require("../constants/chat.contants");
+const chatServices = require("../services/chat.services");
 
-const getChat = () => {
+const getChatMessages = (history_id) => {
 
     return dispatch => {
-        axios.get('chat/get').then(response => {
+        chatServices.getChatMessages(history_id).then(response => {
             dispatch({
-                type: "GET_CHAT",
+                type: chatConstants.GET_CHAT_MESSAGES,
                 payload: response.data
             });
         });
@@ -13,6 +14,37 @@ const getChat = () => {
 
 };
 
+const postMessage = (message, history_id) => {
+
+    return dispatch => {
+        chatServices.postMessage(message, history_id).then(response => {
+            dispatch({
+                type: chatConstants.POST_BOT_MESSAGE,
+                payload: response.data
+            });
+        });
+    };
+
+};
+
+const addUserMessage = (message, history_id) => {
+
+    return dispatch => {
+        dispatch({
+            type: chatConstants.addUserMessage,
+            payload: {
+                message: message,
+                history_id: history_id,
+            }
+        });
+
+    };
+
+};
+
+POST_USER_MESSAGE
+
 export {
-    getChat
+    getChatMessages,
+    postMessage,
 }
