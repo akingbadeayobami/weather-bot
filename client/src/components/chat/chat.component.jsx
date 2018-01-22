@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { getChat } from "../../actions/chat.actions";
+import { getChatMessages } from "../../actions/chat.actions";
 import { connect } from "react-redux";
 
 class Main extends Component {
 
     componentWillMount() {
 
+        this.props.getChatMessages(0);
 
     }
+
     render() {
         return ( 
                 <div className="row">
@@ -108,8 +110,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getChat: () => {
-            dispatch(getChat());
+        getChatMessages: (history_id) => {
+            dispatch(getChatMessages(history_id));
         }
     };
 };

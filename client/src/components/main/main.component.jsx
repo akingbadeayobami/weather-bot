@@ -12,13 +12,13 @@ class Main extends Component {
         return (
             <div id="main-wrapper">
 
-                <nav class="navbar navbar-default">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <a class="navbar-brand" href="#">Weather Chat Bot</a>
+                <nav className="navbar navbar-default">
+                    <div className="container">
+                        <div className="navbar-header">
+                            <a className="navbar-brand" href="#">Weather Chat Bot</a>
                         </div>
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Home</a></li>
+                        <ul className="nav navbar-nav">
+                            <li className="active"><a href="#">Home</a></li>
                         </ul>
                     </div>
                 </nav>

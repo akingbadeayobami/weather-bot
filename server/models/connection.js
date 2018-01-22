@@ -10,5 +10,4 @@ const env = process.env.NODE_ENV || 'development';
 
 module.exports = mongoose.createConnection(dbConfig[env].storage, function(err, con) {
     console.log("error", err);
-    console.log(con);
 });

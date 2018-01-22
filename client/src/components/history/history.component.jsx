@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { getHistory } from "../../actions/history.actions";
+import { getChatMessages } from "../../actions/chat.actions";
 
 class History extends Component {
 
     componentWillMount() {
 
+        this.props.getHistory();
+
+    }
+
+    getChatMessages(history_id){
+
+        console.log(history_id);
+        //  this.props.getChatMessages();
 
     }
     render() {
@@ -15,36 +24,21 @@ class History extends Component {
                     <div className="panel panel-default">
                         <div className="panel-heading">
                             History
-
+ 
                             </div>
                         <div className="history-body panel-body">
                             <ul className="history">
 
-
-                                <li>
-                                    <a href="#">
-                                    <strong><p>Yesterday</p></strong>
-                                    <p> You are very well welcome we are happy </p>
-                                    </a>
-                                </li>
- 
-                                
-                                <li>
-                                    <a href="#">
-                                    <strong><p>Yesterday</p></strong>
-                                    <p> You are very well welcome we are happy </p>
-                                    </a>
-                                </li>
- 
-
-
-                                <li>
-                                    <a href="#">
-                                    <strong><p>Yesterday</p></strong>
-                                    <p> You are very well welcome we are happy </p>
-                                    </a>
-                                </li>
- 
+                                {
+                                    this.props.history.history.map(chat => 
+                                        <li>
+                                            <a  onClick={this.getChatMessages.bind(this,chat.id)} >
+                                                <strong><p>{chat.date}</p></strong>
+                                                <p> {chat.message} </p>
+                                            </a>
+                                        </li>
+                                    )
+                                }
 
 
                             </ul>
@@ -67,6 +61,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getHistory: () => {
             dispatch(getHistory());
+        },
+        getChatMessages: (history_id)=>{
+            dispatch(getChatMessages(getChatMessages));
         }
     };
 };

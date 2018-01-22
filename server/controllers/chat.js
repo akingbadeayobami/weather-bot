@@ -21,9 +21,19 @@ const chatController = {
 
             // Do Some mapp to get the last date and messgae of the chat
 
-            res.status(200).send({
-                chats: chats
-            });
+            let chats1 = [{
+                    id: 1,
+                    message: "helloe",
+                    date: "Yesterday",
+                },
+                {
+                    id: 2,
+                    message: "KIs me ",
+                    date: "Now",
+                }
+            ];
+
+            res.status(200).send(chats1);
 
         });
 
@@ -42,9 +52,7 @@ const chatController = {
         Chat.find({ history_id: req.params.history_id }, function(err, chat) {
             if (err) return next(err);
 
-            res.status(200).send({
-                chat: chat
-            });
+            res.status(200).send(chat);
 
         });
 

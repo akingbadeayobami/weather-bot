@@ -1,4 +1,4 @@
-const chatConstants = require("../constants/chat.contants");
+const { chatConstants } = require("../constants/chat.contants");
 
 const initial = {
     chat: []

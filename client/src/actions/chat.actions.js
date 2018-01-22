@@ -1,4 +1,4 @@
-const chatConstants = require("../constants/chat.contants");
+const { chatConstants } = require("../constants/chat.contants");
 const chatServices = require("../services/chat.services");
 
 const getChatMessages = (history_id) => {
@@ -42,9 +42,8 @@ const addUserMessage = (message, history_id) => {
 
 };
 
-POST_USER_MESSAGE
-
 export {
     getChatMessages,
     postMessage,
+    addUserMessage
 }

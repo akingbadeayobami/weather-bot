@@ -21,7 +21,7 @@ function postMessage(message, history_id) {
 
 }
 
-export const chatService = {
+export {
     getHistory,
     getChatMessages,
     postMessage,
