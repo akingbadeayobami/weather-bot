@@ -1,4 +1,4 @@
-export const chatConstants = {
+module.exports = {
     GET_CHAT_MESSAGES: 'GET_CHAT_MESSAGES',
     POST_USER_MESSAGE: 'POST_USER_MESSAGE',
     POST_BOT_MESSAGE: 'POST_BOT_MESSAGE'

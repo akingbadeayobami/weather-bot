@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getLastChatMessages, postMessage } from "../../actions/chat.actions";
-import { messageByConstants } from "../../constants/messageby.constants";
+import { messageByConstants } from "../../constants";
 import MyMessage from "./my.message.component";
 import BotMessage from "./bot.message.component";
 import { connect } from "react-redux";
@@ -85,13 +85,18 @@ class Main extends Component {
                             </div>
                         </div>
                         <div className="panel-footer">
+                            <form onSubmit={(e) => {
+                                    this.sendMessage()
+                                    e.preventDefault();
+                                }} >
                             <div className="input-group">
-                                <input id="btn-input" type="text" className="form-control input-sm" ref="message" placeholder="Type your message here..." />
+                                <input id="btn-input" type="text" className="form-control input-sm" ref="message" placeholder="Type your message here..." required/>
                                 <span className="input-group-btn">
-                                    <button className="btn btn-warning btn-sm" id="btn-chat" onClick={this.sendMessage.bind(this)}>
+                                    <button className="btn btn-warning btn-sm" type="submit" id="btn-chat" >
                                         Send</button>
                                 </span>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>

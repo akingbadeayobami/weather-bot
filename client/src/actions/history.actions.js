@@ -1,4 +1,4 @@
-const { historyConstants } = require("../constants/history.constants");
+const { historyConstants } = require("../constants");
 const chatServices = require("../services/chat.services");
 
 const getHistory = () => {

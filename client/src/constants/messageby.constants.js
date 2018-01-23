@@ -1,4 +1,4 @@
-export const messageByConstants = {
+module.exports = {
     BOT: 1,
     USER: 2
 };
