@@ -1,7 +1,8 @@
 "use strict";
 const Chat = require('../models').Chat,
     botController = require('./bot'),
-    messageBy = require('../enums').MessageBy;
+    messageBy = require('../enums').MessageBy,
+    Promise = require('bluebird');
 
 /** @namespace chatController */
 const chatController = {
@@ -14,28 +15,43 @@ const chatController = {
      * @param {object} res - Express Response Object
      * @return {undefined}
      */
-    getHistory(req, res) {
+    getHistory(req, res, next) {
 
-        Chat.find().distinct('history_id', function(err, chats) {
-            if (err) return next(err);
+        return new Promise((resolve, reject) => {
 
-            // Do Some mapp to get the last date and messgae of the chat
+            Chat.find().distinct('history_id').exec().then(historyIds => {
 
-            let chats1 = [{
-                    id: 1,
-                    message: "helloe",
-                    date: "Yesterday",
-                },
-                {
-                    id: 2,
-                    message: "KIs me ",
-                    date: "Now",
-                }
-            ];
+                resolve(historyIds);
 
-            res.status(200).send(chats1);
+            }).catch(err => {
+
+                if (err) return next(err);
+
+            });
+
+        }).map(history_id => {
+
+            return new Promise((resolve, reject) => {
+
+                Chat.findOne({ history_id: history_id }).sort('-created_at').exec().then(lastChat => {
+
+                    resolve(lastChat);
+
+                }).catch(err => {
+
+                    if (err) return next(err);
+
+                });
+
+            });
+
+        }).then(chats => {
+
+            res.status(200).send(chats);
 
         });
+
+
 
     },
 
@@ -49,35 +65,38 @@ const chatController = {
      */
     getChatMessages(req, res, next) {
 
-        Chat.find({history_id : req.params.history_id },function(err, chat) {
+        Chat.find({ history_id: req.params.history_id }).exec().then(chat => {
+
+            res.status(200).send(chat);
+
+        }).catch(err => {
 
             if (err) return next(err);
-                        
-            res.status(200).send(chat);
-          
+
         });
 
     },
 
-    getLastChatHistory(req, res, next){
+    getLastChatHistory(req, res, next) {
 
-        Chat.findOne().sort('-created_at').exec(function(err, chat) {
+        Chat.findOne().sort('-created_at').exec().then(chat => {
 
             let history_id;
 
-            if (err) return next(err);
 
-            if(!chat){
+            if (!chat) {
                 history_id = 0;
-            }else{
+            } else {
                 history_id = chat.history_id;
             }
-            
+
             req.params.history_id = history_id;
 
             next();
 
 
+        }).catch(err => {
+            if (err) return next(err);
         });
 
     },

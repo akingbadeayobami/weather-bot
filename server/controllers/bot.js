@@ -65,6 +65,4 @@ const botController = {
 
 };
 
-botController.getWeather("What is the weather in Finland");
-
 module.exports = botController;

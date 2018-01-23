@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { getHistory } from "../../actions/history.actions";
-import { getChatMessages } from "../../actions/chat.actions";
+import { getChatMessages } from "../../actions/chat.actions"; 
+import {date_format} from '../../utils';
 
 class History extends Component {
 
@@ -12,9 +13,8 @@ class History extends Component {
     }
 
     getChatMessages(history_id){
-
-        console.log(history_id);
-        //  this.props.getChatMessages();
+ 
+         this.props.getChatMessages(history_id);
 
     }
     render() {
@@ -31,9 +31,9 @@ class History extends Component {
 
                                 {
                                     this.props.history.history.map(chat => 
-                                        <li key={chat.id}>
-                                            <a  onClick={this.getChatMessages.bind(this,chat.id)} >
-                                                <strong><p>{chat.date}</p></strong>
+                                        <li key={chat._id}>
+                                            <a  onClick={this.getChatMessages.bind(this,chat.history_id)} >
+                                                <strong><p>{date_format(chat.created_at)}</p></strong>
                                                 <p> {chat.message} </p>
                                             </a>
                                         </li>
@@ -63,7 +63,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(getHistory());
         },
         getChatMessages: (history_id)=>{
-            dispatch(getChatMessages(getChatMessages));
+            dispatch(getChatMessages(history_id));
         }
     };
 };

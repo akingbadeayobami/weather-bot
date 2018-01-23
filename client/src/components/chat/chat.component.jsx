@@ -78,7 +78,7 @@ class Main extends Component {
 
                             </ul>
  
-                            {(this.props.chat.loading) && (<div className="loader"  ></div>) }
+                            {(this.props.chat.loading) && (<div className="loader"  />) }
                             
                             <div style={{ float: "left", clear: "both" }}
                                 ref={(el) => { this.messagesEnd = el; }}>
