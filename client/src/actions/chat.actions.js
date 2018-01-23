@@ -2,10 +2,25 @@ const { chatConstants, messageByConstants } = require("../constants");
 const chatServices = require("../services/chat.services");
 const { random_id } = require("../utils");
 
+
+/**
+ * @function getSessionMessages
+ * @description Action for when getting a session's messages
+ * @param {number} session_id - Session ID
+ */
 const getSessionMessages = (session_id) => {
 
     return dispatch => {
+        // dispatch to set the new session id
+        dispatch({
+            type: chatConstants.NEW_CHAT_SESSION,
+            payload: {
+                session_id: session_id
+            }
+        });
+
         chatServices.getSessionMessages(session_id).then(response => {
+            // dispatch to set the messages for the session
             dispatch({
                 type: chatConstants.GET_CHAT_MESSAGES,
                 payload: response.data
@@ -15,11 +30,15 @@ const getSessionMessages = (session_id) => {
 
 };
 
-
+/**
+ * @function getNewSession
+ * @description Action for when creating a new session
+ */
 const getNewSession = () => {
 
     return dispatch => {
         chatServices.getNewSession().then(response => {
+            // dispatch to set the new sessionID
             dispatch({
                 type: chatConstants.NEW_CHAT_SESSION,
                 payload: response.data
@@ -29,10 +48,17 @@ const getNewSession = () => {
 
 }
 
+/**
+ * @function postMessage
+ * @description Action for when sending a message to the bot
+ * @param {string} message - User's Message
+ * @param {number} session_id - Session ID
+ */
 const postMessage = (message, session_id) => {
 
     return dispatch => {
 
+        // dispatch to append the user's message to the chat
         dispatch({
             type: chatConstants.POST_USER_MESSAGE,
             payload: {
@@ -45,6 +71,7 @@ const postMessage = (message, session_id) => {
         });
 
         chatServices.postMessage(message, session_id).then(response => {
+            // dispatch to append the bot's reply to the chat
             dispatch({
                 type: chatConstants.POST_BOT_MESSAGE,
                 payload: {

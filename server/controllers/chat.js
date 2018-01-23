@@ -9,16 +9,15 @@ const chatController = {
 
     /**
      * @name getAllSession
-     * @description Get All Chat Session
-     * @param {object} req - Express Request Object
-     * @param {string} req.body.username - Username submitted
+     * @description Get All Chat Sessions And Their Last Message
+     * @param {object} req - Express Request Object 
      * @param {object} res - Express Response Object
      * @return {undefined}
      */
     getAllSession(req, res, next) {
 
         return new Promise((resolve, reject) => {
-
+            // Get all unique session ids
             Chat.find().distinct('session_id').exec().then(sessionIds => {
 
                 resolve(sessionIds);
@@ -32,7 +31,7 @@ const chatController = {
         }).map(session_id => {
 
             return new Promise((resolve, reject) => {
-
+                // Get the last message for each session
                 Chat.findOne({ session_id: session_id }).sort('-_id').exec().then(lastChat => {
 
                     resolve(lastChat);
@@ -57,7 +56,7 @@ const chatController = {
 
     /**
      * @name getChatMessages
-     * @description Get All Chat Messages 
+     * @description Get All Chat Messages For A Session 
      * @param {object} req - Express Request Object
      * @param {number} req.params.session_id - Chat Session Id
      * @param {object} res - Express Response Object
@@ -77,6 +76,13 @@ const chatController = {
 
     },
 
+    /**
+     * @name getNewSession
+     * @description Get new sessionID 
+     * @param {object} req - Express Request Object
+     * @param {object} res - Express Response Object
+     * @return {undefined}
+     */
     getNewSession(req, res, next) {
 
         Chat.findOne().sort('-session_id').exec().then(chat => {
@@ -110,6 +116,8 @@ const chatController = {
      * @return {undefined}
      */
     postMessage(req, res, next) {
+
+        // Create the user's Messages
         Chat.create({
             message: req.body.message,
             session_id: req.body.session_id,
@@ -118,8 +126,10 @@ const chatController = {
 
             if (err) return next(err);
 
+            // Get the bot reply to the message
             botController.getWeather(req.body.message).then(message => {
 
+                // Create the bot's reply
                 Chat.create({
                     message: message,
                     session_id: req.body.session_id,

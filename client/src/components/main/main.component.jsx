@@ -4,10 +4,6 @@ import Chat from '../chat/chat.component.jsx';
 
 class Main extends Component {
 
-    componentWillMount() {
-
-
-    }
     render() {
         return (
             <div id="main-wrapper">
@@ -17,9 +13,6 @@ class Main extends Component {
                         <div className="navbar-header">
                             <a className="navbar-brand" href="#">Weather Chat Bot</a>
                         </div>
-                        <ul className="nav navbar-nav">
-                            <li className="active"><a href="#">Home</a></li>
-                        </ul>
                     </div>
                 </nav>
 

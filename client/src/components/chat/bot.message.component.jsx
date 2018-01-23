@@ -26,12 +26,7 @@ class BotMessageBox extends Component {
             </li>
         )
     }
-
-
-
-
+ 
 }
-
-
 
 export default BotMessageBox;

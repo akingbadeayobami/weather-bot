@@ -1,17 +1,25 @@
 import dateformat from "dateformat"
 import randomstring from "randomstring";
 
-const date_format = (date) => {
+/**
+ * @function dateFormat
+ * @description Formats Input Date To Be More User Friendly
+ */
+const dateFormat = (date) => {
 
     return dateformat(date, "mmm dS, yyyy, h:MM TT");
 
 };
 
-const random_id = () => {
+/**
+ * @function randomId
+ * @description Formats Input Date To Be More User Friendly
+ */
+const randomId = () => {
     return randomstring.generate(12);
 }
 
 export {
-    date_format,
-    random_id
+    dateFormat,
+    randomId
 };
