@@ -5,23 +5,11 @@ var request = require('supertest'),
 
 describe("Index Page", function() {
 
-    it("should show 'Weather App'", function(done) {
+    it("should show 'Weather Bot'", function(done) {
         request(app).get('/api')
             .end(function(err, response) {
                 expect(response.statusCode).to.equal(200);
-                expect(/Real Time Auction/, done);
-                done();
-            });
-    });
-
-});
-describe("None existing page", function() {
-
-    it("should show 'Not Found'", function(done) {
-        request(app).get('/api/notexisting')
-            .end(function(err, response) {
-                expect(response.statusCode).to.equal(404);
-                expect(/Not Found/, done);
+                expect(/Weather Bot/, done);
                 done();
             });
     });

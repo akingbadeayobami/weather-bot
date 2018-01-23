@@ -2,10 +2,10 @@ const { chatConstants, messageByConstants } = require("../constants");
 const chatServices = require("../services/chat.services");
 const { random_id } = require("../utils");
 
-const getChatMessages = (session_id) => {
+const getSessionMessages = (session_id) => {
 
     return dispatch => {
-        chatServices.getChatMessages(session_id).then(response => {
+        chatServices.getSessionMessages(session_id).then(response => {
             dispatch({
                 type: chatConstants.GET_CHAT_MESSAGES,
                 payload: response.data
@@ -73,7 +73,7 @@ const postMessage = (message, session_id) => {
 };
 
 export {
-    getChatMessages,
+    getSessionMessages,
     postMessage,
     getLastChatMessages,
     getNewSession

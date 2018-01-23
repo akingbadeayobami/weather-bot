@@ -1,3 +1,3 @@
 module.exports = {
-    GET_HISTORY: 'GET_HISTORY'
+    GET_ALL_SESSION: 'GET_ALL_SESSION'
 };

@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { getSession } from "../../actions/session.actions";
-import { getChatMessages } from "../../actions/chat.actions"; 
+import { getAllSession } from "../../actions/session.actions";
+import { getSessionMessages } from "../../actions/chat.actions"; 
 import {date_format} from '../../utils';
 
 class Session extends Component {
 
     componentWillMount() {
 
-        this.props.getSession();
+        this.props.getAllSession();
 
     }
 
-    getChatMessages(session_id){
+    getSessionMessages(session_id){
  
-         this.props.getChatMessages(session_id);
+         this.props.getSessionMessages(session_id);
 
     }
     render() {
@@ -31,9 +31,9 @@ class Session extends Component {
                                 {
                                     this.props.session.session.map(chat => 
                                         <li key={chat._id}>
-                                            <a  onClick={this.getChatMessages.bind(this,chat.session_id)} >
+                                            <a  onClick={this.getSessionMessages.bind(this,chat.session_id)} >
                                                 <strong><p>{date_format(chat.created_at)}</p></strong>
-                                                <p> {chat.message} </p>
+                                                <p className="oneLine"> {chat.message} </p>
                                             </a>
                                         </li>
                                     )
@@ -62,11 +62,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getSession: () => {
-            dispatch(getSession());
+        getAllSession: () => {
+            dispatch(getAllSession());
         },
-        getChatMessages: (session_id)=>{
-            dispatch(getChatMessages(session_id));
+        getSessionMessages: (session_id)=>{
+            dispatch(getSessionMessages(session_id));
         }
     };
 };

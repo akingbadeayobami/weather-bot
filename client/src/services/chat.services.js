@@ -1,14 +1,14 @@
 import axios from "./axios";
 
-function getSession() {
+function getAllSession() {
 
-    return axios.get('chat/session');
+    return axios.get('chat/session/all');
 
 }
 
-function getChatMessages(session_id) {
+function getSessionMessages(session_id) {
 
-    return axios.get('chat/messages/' + session_id);
+    return axios.get('chat/session/' + session_id);
 
 }
 
@@ -21,7 +21,7 @@ function getNewSession() {
 
 function getLastChatMessages() {
 
-    return axios.get('chat/messages/last');
+    return axios.get('chat/session/last');
 
 }
 
@@ -36,8 +36,8 @@ function postMessage(message, session_id) {
 }
 
 export {
-    getSession,
-    getChatMessages,
+    getAllSession,
+    getSessionMessages,
     postMessage,
     getLastChatMessages,
     getNewSession

@@ -1,0 +1,20 @@
+[{
+        "message": "What is the weather in Lagos?",
+        "session_id": "1",
+        "message_by": "1"
+    }, {
+        "message": "The Weather is sunny",
+        "session_id": "1",
+        "message_by": "2"
+    },
+    {
+        "message": "What is the weather in Russia",
+        "session_id": "2",
+        "message_by": "1"
+    },
+    {
+        "message": "The weather is cold",
+        "session_id": "2",
+        "message_by": "1"
+    }
+]

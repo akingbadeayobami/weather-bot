@@ -7,7 +7,7 @@ const initial = {
 
 const session = (state = initial, action) => {
 
-    if (action.type === sessionConstants.GET_HISTORY) {
+    if (action.type === sessionConstants.GET_ALL_SESSION) {
         return {...state, session: action.payload };
     }
 

@@ -8,14 +8,14 @@ const Chat = require('../models').Chat,
 const chatController = {
 
     /**
-     * @name getSession
+     * @name getAllSession
      * @description Get All Chat Session
      * @param {object} req - Express Request Object
      * @param {string} req.body.username - Username submitted
      * @param {object} res - Express Response Object
      * @return {undefined}
      */
-    getSession(req, res, next) {
+    getAllSession(req, res, next) {
 
         return new Promise((resolve, reject) => {
 

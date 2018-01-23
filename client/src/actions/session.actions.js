@@ -1,12 +1,12 @@
 const { sessionConstants } = require("../constants");
 const chatServices = require("../services/chat.services");
 
-const getSession = () => {
+const getAllSession = () => {
 
     return dispatch => {
-        chatServices.getSession().then(response => {
+        chatServices.getAllSession().then(response => {
             dispatch({
-                type: sessionConstants.GET_HISTORY,
+                type: sessionConstants.GET_ALL_SESSION,
                 payload: response.data
             });
         });
@@ -15,5 +15,5 @@ const getSession = () => {
 };
 
 export {
-    getSession
+    getAllSession
 }
