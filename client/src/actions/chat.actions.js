@@ -1,4 +1,5 @@
 const { chatConstants } = require("../constants/chat.contants");
+const { messageByConstants } = require("../constants/messageby.constants");
 const chatServices = require("../services/chat.services");
 
 const getChatMessages = (history_id) => {
@@ -32,27 +33,26 @@ const getLastChatMessages = () => {
 const postMessage = (message, history_id) => {
 
     return dispatch => {
-        chatServices.postMessage(message, history_id).then(response => {
-            dispatch({
-                type: chatConstants.POST_BOT_MESSAGE,
-                payload: response.data
-            });
-        });
-    };
 
-};
-
-const addUserMessage = (message, history_id) => {
-
-    return dispatch => {
         dispatch({
-            type: chatConstants.addUserMessage,
+            type: chatConstants.POST_MESSAGE,
             payload: {
                 message: message,
                 history_id: history_id,
+                message_by: messageByConstants.USER,
             }
         });
 
+        chatServices.postMessage(message, history_id).then(response => {
+            dispatch({
+                type: chatConstants.POST_MESSAGE,
+                payload: {
+                    message: response.data.message,
+                    history_id: history_id,
+                    message_by: messageByConstants.BOT,
+                }
+            });
+        });
     };
 
 };
@@ -60,6 +60,5 @@ const addUserMessage = (message, history_id) => {
 export {
     getChatMessages,
     postMessage,
-    addUserMessage,
     getLastChatMessages
 }

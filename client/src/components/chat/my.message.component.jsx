@@ -11,7 +11,7 @@ class MyMessageBox extends Component {
                 <div className="chat-body clearfix">
                     <div className="header">
                         <small className=" text-muted"><span className="glyphicon glyphicon-time"></span>13 mins ago</small>
-                        <strong className="pull-right primary-font">Bhaumik Patel</strong>
+                        <strong className="pull-right primary-font">You</strong>
                     </div>
                     <p>
                         {this.props.message.message}
@@ -20,9 +20,6 @@ class MyMessageBox extends Component {
             </li>
         )
     }
-
-                                     
-           
  
 }
  

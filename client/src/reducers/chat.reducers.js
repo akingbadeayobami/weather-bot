@@ -10,15 +10,15 @@ const chat = (state = initial, action) => {
         return {...state, chat: action.payload };
     }
 
-    if (action.type === chatConstants.POST_BOT_MESSAGE) {
-        // append the message to chat for bot
-        return {...state, chat: action.payload };
+    if (action.type === chatConstants.POST_MESSAGE) {
+
+        return {
+            ...state,
+            chat: state.chat.concat(action.payload)
+        }
+
     }
 
-    if (action.type === chatConstants.POST_USER_MESSAGE) {
-        // append the message to chat for user
-        return {...state, chat: action.payload };
-    }
 
     return state;
 

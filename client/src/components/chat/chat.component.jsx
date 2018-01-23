@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { getLastChatMessages } from "../../actions/chat.actions";
+import { getLastChatMessages, postMessage } from "../../actions/chat.actions";
+import { messageByConstants } from "../../constants/messageby.constants";
 import MyMessage from "./my.message.component";
 import BotMessage from "./bot.message.component";
 import { connect } from "react-redux";
@@ -14,13 +15,17 @@ class Main extends Component {
 
     newChat(){
 
-        console.log("kiss me")
+        console.log("kiss me");
 
     }
 
     sendMessage(){
+        
+        const message = this.refs.message.value;
 
-        console.log(this.refs.message.value);
+        const history_id = 1;
+
+        this.props.postMessage(message, history_id);
 
     }
 
@@ -42,10 +47,10 @@ class Main extends Component {
                                 <ul className="chat">
 
                                   { this.props.chat.chat.map(message => 
-                                    <p key={message.id}>
+                                    <div key={message._id}>
 
                                             {
-                                                 (message.message_by == 0) ? (
+                                                 (message.message_by === messageByConstants.USER) ? (
                                                      <MyMessage message={message}/>
                                                  ) : (
                                                        <BotMessage message={message}/>
@@ -53,7 +58,7 @@ class Main extends Component {
                                             }
 
                                     
-                                    </p>
+                                    </div>
                                   )}
 
                                 </ul>
@@ -86,6 +91,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getLastChatMessages: () => {
             dispatch(getLastChatMessages());
+        },
+        postMessage : (message, history_id) => {
+            dispatch(postMessage(message, history_id));
         }
     };
 };
