@@ -20,7 +20,9 @@ const config = {
     },
 
     "test": {
-        "mongodb_url": process.env.MONGODB_URL
+        "mongodb_url": process.env.MONGODB_URL,
+        "wit_api_key": "XXXXXXXXXXXXXXXXXXX",
+        "weather_bit_api_key": "XXXXXXXXXXXXXXXXXXX",
     }
 
 };

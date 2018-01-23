@@ -34,7 +34,7 @@ const botController = {
 
                     request(`https://api.weatherbit.io/v2.0/current?city=${location}&key=${config.weather_bit_api_key}`, { json: true }, (err, res, body) => {
 
-                        if (err) { return console.log(err); }
+                        if (err) { return reject(err); }
 
                         let weatherResponse;
 
@@ -57,7 +57,9 @@ const botController = {
                     });
 
                 })
-                .catch(console.error);
+                .catch(err => {
+                    reject(err);
+                });
 
         });
 

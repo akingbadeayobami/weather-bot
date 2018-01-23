@@ -33,7 +33,7 @@ const chatController = {
 
             return new Promise((resolve, reject) => {
 
-                Chat.findOne({ session_id: session_id }).sort('-created_at').exec().then(lastChat => {
+                Chat.findOne({ session_id: session_id }).sort('-_id').exec().then(lastChat => {
 
                     resolve(lastChat);
 
@@ -109,8 +109,7 @@ const chatController = {
      * @param {object} res - Express Response Object
      * @return {undefined}
      */
-    postMessage(req, res) {
-
+    postMessage(req, res, next) {
         Chat.create({
             message: req.body.message,
             session_id: req.body.session_id,
@@ -132,7 +131,7 @@ const chatController = {
                     message: message
                 });
 
-            }).catch(error => {
+            }).catch(err => {
 
                 return next(err);
 
