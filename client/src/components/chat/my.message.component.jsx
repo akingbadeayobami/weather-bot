@@ -1,8 +1,17 @@
-import React, { Component } from 'react'; 
+import React, { Component } from 'react';
+import {date_format} from '../../utils';
 
 class MyMessageBox extends Component {
 
+
     render() {
+
+        const {
+            message,
+            created_at
+        } = this.props.message;
+
+
         return (
 
             <li className="right clearfix"><span className="chat-img pull-right">
@@ -10,20 +19,20 @@ class MyMessageBox extends Component {
             </span>
                 <div className="chat-body clearfix">
                     <div className="header">
-                        <small className=" text-muted"><span className="glyphicon glyphicon-time"></span>13 mins ago</small>
-                        <strong className="pull-right primary-font">You</strong>
+                        <small className=" text-muted"><span className="glyphicon glyphicon-time"></span>{date_format(created_at)}</small>
+                        <strong className="pull-right primary-font">Me</strong>
                     </div>
                     <p>
-                        {this.props.message.message}
+                        {message}
                     </p>
                 </div>
             </li>
         )
     }
- 
-}
- 
 
- 
+}
+
+
+
 
 export default MyMessageBox;

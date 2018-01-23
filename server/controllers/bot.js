@@ -52,8 +52,6 @@ const botController = {
 
                         }
 
-                        console.log(weatherResponse);
-
                         resolve(weatherResponse);
 
                     });
