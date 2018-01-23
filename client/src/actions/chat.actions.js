@@ -15,18 +15,6 @@ const getSessionMessages = (session_id) => {
 
 };
 
-const getLastChatMessages = () => {
-
-    return dispatch => {
-        chatServices.getLastChatMessages().then(response => {
-            dispatch({
-                type: chatConstants.GET_CHAT_MESSAGES,
-                payload: response.data
-            });
-        });
-    };
-
-};
 
 const getNewSession = () => {
 
@@ -75,6 +63,5 @@ const postMessage = (message, session_id) => {
 export {
     getSessionMessages,
     postMessage,
-    getLastChatMessages,
     getNewSession
 }

@@ -99,30 +99,6 @@ const chatController = {
 
     },
 
-    getLastChatSession(req, res, next) {
-
-        Chat.findOne().sort('-created_at').exec().then(chat => {
-
-            let session_id;
-
-
-            if (!chat) {
-                session_id = 0;
-            } else {
-                session_id = chat.session_id;
-            }
-
-            req.params.session_id = session_id;
-
-            next();
-
-
-        }).catch(err => {
-            if (err) return next(err);
-        });
-
-    },
-
 
     /**
      * @name postMessage

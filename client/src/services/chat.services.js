@@ -18,14 +18,6 @@ function getNewSession() {
 
 }
 
-
-function getLastChatMessages() {
-
-    return axios.get('chat/session/last');
-
-}
-
-
 function postMessage(message, session_id) {
 
     return axios.post('chat/', {
@@ -39,6 +31,5 @@ export {
     getAllSession,
     getSessionMessages,
     postMessage,
-    getLastChatMessages,
     getNewSession
 };

@@ -33,7 +33,7 @@ class Session extends Component {
                                         <li key={chat._id}>
                                             <a  onClick={this.getSessionMessages.bind(this,chat.session_id)} >
                                                 <strong><p>{date_format(chat.created_at)}</p></strong>
-                                                <p className="oneLine"> {chat.message} </p>
+                                                <p className="one-line"> {chat.message} </p>
                                             </a>
                                         </li>
                                     )
@@ -43,7 +43,7 @@ class Session extends Component {
 
                             </ul>
 
-                            {(this.props.session.session.length === 0) && (<p>You have not had any chat sessions</p>)}
+                            {(this.props.session.session.length === 0) && (<p className="text-center">You have not had any chat sessions</p>)}
 
                         </div>
                     </div>

@@ -7,8 +7,6 @@ router.get('/session/all', chatController.getAllSession);
 
 router.get('/session/new', chatController.getNewSession);
 
-router.get('/session/last', chatController.getLastChatSession, chatController.getChatMessages);
-
 router.get('/session/:session_id', chatController.getChatMessages);
 
 router.post('/', chatController.postMessage);

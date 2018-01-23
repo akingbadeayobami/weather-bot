@@ -103,8 +103,13 @@
     }
 }
 
-.oneLine {
+.one-line {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.chat-bottom {
+    float: left;
+    clear: both;
 }

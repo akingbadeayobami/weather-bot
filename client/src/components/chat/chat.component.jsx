@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
-import { getLastChatMessages, postMessage, getNewSession } from "../../actions/chat.actions";
+import { postMessage, getNewSession } from "../../actions/chat.actions";
 import { messageByConstants } from "../../constants";
 import MyMessage from "./my.message.component";
 import BotMessage from "./bot.message.component";
 import { connect } from "react-redux";
 
-class Main extends Component {
+class Chat extends Component {
 
     componentWillMount() {
 
-        this.props.getLastChatMessages();
-
-    }
-
-    newSession() {
-
         this.props.getNewSession();
- 
+
     }
 
     scrollToBottom = () => {
@@ -48,12 +42,7 @@ class Main extends Component {
                     <div className="panel panel-default">
                         <div className="panel-heading">
                             Chat
-                          <div className="btn-group pull-right">
-                                <button type="button" className="btn btn-default btn-xs" onClick={this.newSession.bind(this)}  >
-                                    New Session
-                                    </button>
-
-                            </div>
+                          
                         </div>
                         <div className="chat-body panel-body">
                             <ul className="chat">
@@ -78,7 +67,7 @@ class Main extends Component {
  
                             {(this.props.chat.loading) && (<div className="loader"  />) }
                             
-                            <div style={{ float: "left", clear: "both" }}
+                            <div className="chatBottom"
                                 ref={(el) => { this.messagesEnd = el; }}>
                             </div>
                         </div>
@@ -113,16 +102,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getLastChatMessages: () => {
-            dispatch(getLastChatMessages());
+        getNewSession: () => {
+            dispatch(getNewSession());
         },
         postMessage: (message, session_id) => {
             dispatch(postMessage(message, session_id));
-        },
-        getNewSession : () => {
-            dispatch(getNewSession());
         }
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);
