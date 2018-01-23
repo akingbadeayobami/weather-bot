@@ -3,7 +3,7 @@ const mongooseConnection = require('./connection');
 const Schema = require('mongoose').Schema;
 
 var ChatSchema = new Schema({
-    history_id: { type: Number, required: true },
+    session_id: { type: Number, required: true },
     message: { type: String, required: true },
     message_by: { type: Number, required: true },
     created_at: Date,

@@ -8,20 +8,20 @@ const Chat = require('../models').Chat,
 const chatController = {
 
     /**
-     * @name getHistory
-     * @description Get All Chat History
+     * @name getSession
+     * @description Get All Chat Session
      * @param {object} req - Express Request Object
      * @param {string} req.body.username - Username submitted
      * @param {object} res - Express Response Object
      * @return {undefined}
      */
-    getHistory(req, res, next) {
+    getSession(req, res, next) {
 
         return new Promise((resolve, reject) => {
 
-            Chat.find().distinct('history_id').exec().then(historyIds => {
+            Chat.find().distinct('session_id').exec().then(sessionIds => {
 
-                resolve(historyIds);
+                resolve(sessionIds);
 
             }).catch(err => {
 
@@ -29,11 +29,11 @@ const chatController = {
 
             });
 
-        }).map(history_id => {
+        }).map(session_id => {
 
             return new Promise((resolve, reject) => {
 
-                Chat.findOne({ history_id: history_id }).sort('-created_at').exec().then(lastChat => {
+                Chat.findOne({ session_id: session_id }).sort('-created_at').exec().then(lastChat => {
 
                     resolve(lastChat);
 
@@ -59,13 +59,13 @@ const chatController = {
      * @name getChatMessages
      * @description Get All Chat Messages 
      * @param {object} req - Express Request Object
-     * @param {number} req.params.history_id - Chat History Id
+     * @param {number} req.params.session_id - Chat Session Id
      * @param {object} res - Express Response Object
      * @return {undefined}
      */
     getChatMessages(req, res, next) {
 
-        Chat.find({ history_id: req.params.history_id }).exec().then(chat => {
+        Chat.find({ session_id: req.params.session_id }).exec().then(chat => {
 
             res.status(200).send(chat);
 
@@ -77,20 +77,42 @@ const chatController = {
 
     },
 
-    getLastChatHistory(req, res, next) {
+    getNewSession(req, res, next) {
+
+        Chat.findOne().sort('-session_id').exec().then(chat => {
+
+            let session_id;
+
+            if (!chat) {
+                session_id = 1;
+            } else {
+                session_id = chat.session_id + 1;
+            }
+
+            res.status(200).send({
+                session_id: session_id
+            });
+
+        }).catch(err => {
+            if (err) return next(err);
+        });
+
+    },
+
+    getLastChatSession(req, res, next) {
 
         Chat.findOne().sort('-created_at').exec().then(chat => {
 
-            let history_id;
+            let session_id;
 
 
             if (!chat) {
-                history_id = 0;
+                session_id = 0;
             } else {
-                history_id = chat.history_id;
+                session_id = chat.session_id;
             }
 
-            req.params.history_id = history_id;
+            req.params.session_id = session_id;
 
             next();
 
@@ -107,7 +129,7 @@ const chatController = {
      * @description Saves Message, Get Bot Response, Save The reponse and return message to user
      * @param {object} req - Express Request Object
      * @param {string} req.body.message - Chat Message
-     * @param {number} req.body.history_id - Chat History ID
+     * @param {number} req.body.session_id - Chat Session ID
      * @param {object} res - Express Response Object
      * @return {undefined}
      */
@@ -115,7 +137,7 @@ const chatController = {
 
         Chat.create({
             message: req.body.message,
-            history_id: req.body.history_id,
+            session_id: req.body.session_id,
             message_by: messageBy.USER.value
         }, function(err, created) {
 
@@ -125,7 +147,7 @@ const chatController = {
 
                 Chat.create({
                     message: message,
-                    history_id: req.body.history_id,
+                    session_id: req.body.session_id,
                     message_by: messageBy.BOT.value
                 });
 

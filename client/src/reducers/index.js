@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
-import  history  from "./history.reducers";
-import  chat  from "./chat.reducers";
+import session from "./session.reducers";
+import chat from "./chat.reducers";
 
 const reducers = combineReducers({
-    history,
+    session,
     chat,
 });
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getLastChatMessages, postMessage } from "../../actions/chat.actions";
+import { getLastChatMessages, postMessage, getNewSession } from "../../actions/chat.actions";
 import { messageByConstants } from "../../constants";
 import MyMessage from "./my.message.component";
 import BotMessage from "./bot.message.component";
@@ -13,10 +13,10 @@ class Main extends Component {
 
     }
 
-    newChat() {
+    newSession() {
 
-        console.log("kiss me");
-
+        this.props.getNewSession();
+ 
     }
 
     scrollToBottom = () => {
@@ -34,10 +34,8 @@ class Main extends Component {
     sendMessage() {
 
         const message = this.refs.message.value;
-
-        const history_id = 1;
-
-        this.props.postMessage(message, history_id);
+ 
+        this.props.postMessage(message, this.props.chat.session_id);
 
         this.refs.message.value = "";
 
@@ -51,8 +49,8 @@ class Main extends Component {
                         <div className="panel-heading">
                             Chat
                           <div className="btn-group pull-right">
-                                <button type="button" className="btn btn-default btn-xs" onClick={this.newChat.bind(this)}  >
-                                    New Chat
+                                <button type="button" className="btn btn-default btn-xs" onClick={this.newSession.bind(this)}  >
+                                    New Session
                                     </button>
 
                             </div>
@@ -118,8 +116,11 @@ const mapDispatchToProps = (dispatch) => {
         getLastChatMessages: () => {
             dispatch(getLastChatMessages());
         },
-        postMessage: (message, history_id) => {
-            dispatch(postMessage(message, history_id));
+        postMessage: (message, session_id) => {
+            dispatch(postMessage(message, session_id));
+        },
+        getNewSession : () => {
+            dispatch(getNewSession());
         }
     };
 };

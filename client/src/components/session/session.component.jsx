@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { getHistory } from "../../actions/history.actions";
+import { getSession } from "../../actions/session.actions";
 import { getChatMessages } from "../../actions/chat.actions"; 
 import {date_format} from '../../utils';
 
-class History extends Component {
+class Session extends Component {
 
     componentWillMount() {
 
-        this.props.getHistory();
+        this.props.getSession();
 
     }
 
-    getChatMessages(history_id){
+    getChatMessages(session_id){
  
-         this.props.getChatMessages(history_id);
+         this.props.getChatMessages(session_id);
 
     }
     render() {
@@ -23,16 +23,15 @@ class History extends Component {
                 <div className="col-md-12">
                     <div className="panel panel-default">
                         <div className="panel-heading">
-                            History
- 
+                            Sessions  
                             </div>
-                        <div className="history-body panel-body">
-                            <ul className="history">
+                        <div className="session-body panel-body">
+                            <ul className="session">
 
                                 {
-                                    this.props.history.history.map(chat => 
+                                    this.props.session.session.map(chat => 
                                         <li key={chat._id}>
-                                            <a  onClick={this.getChatMessages.bind(this,chat.history_id)} >
+                                            <a  onClick={this.getChatMessages.bind(this,chat.session_id)} >
                                                 <strong><p>{date_format(chat.created_at)}</p></strong>
                                                 <p> {chat.message} </p>
                                             </a>
@@ -40,8 +39,12 @@ class History extends Component {
                                     )
                                 }
 
+                                
 
                             </ul>
+
+                            {(this.props.session.session.length === 0) && (<p>You have not had any chat sessions</p>)}
+
                         </div>
                     </div>
                 </div>
@@ -53,21 +56,21 @@ class History extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        history: state.history,
+        session: state.session,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getHistory: () => {
-            dispatch(getHistory());
+        getSession: () => {
+            dispatch(getSession());
         },
-        getChatMessages: (history_id)=>{
-            dispatch(getChatMessages(history_id));
+        getChatMessages: (session_id)=>{
+            dispatch(getChatMessages(session_id));
         }
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(History);
+export default connect(mapStateToProps, mapDispatchToProps)(Session);
 
 

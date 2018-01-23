@@ -2,7 +2,8 @@ const { chatConstants } = require("../constants");
 
 const initial = {
     chat: [],
-    loading: false
+    loading: false,
+    session_id: 1
 };
 
 const chat = (state = initial, action) => {
@@ -27,6 +28,16 @@ const chat = (state = initial, action) => {
             ...state,
             chat: state.chat.concat(action.payload),
             loading: loading
+        }
+
+    }
+
+    if (action.type === chatConstants.NEW_CHAT_SESSION) {
+
+        return {
+            ...state,
+            chat: [],
+            session_id: action.payload.session_id
         }
 
     }

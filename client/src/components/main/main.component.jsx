@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import History from '../history/history.component.jsx';
+import Session from '../session/session.component.jsx';
 import Chat from '../chat/chat.component.jsx';
 
 class Main extends Component {
@@ -26,7 +26,7 @@ class Main extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-4">
-                            <History />
+                            <Session />
                         </div>
                         <div className="col-md-8">
                             <Chat />

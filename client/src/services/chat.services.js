@@ -1,14 +1,20 @@
 import axios from "./axios";
 
-function getHistory() {
+function getSession() {
 
-    return axios.get('chat/history');
+    return axios.get('chat/session');
 
 }
 
-function getChatMessages(history_id) {
+function getChatMessages(session_id) {
 
-    return axios.get('chat/messages/' + history_id);
+    return axios.get('chat/messages/' + session_id);
+
+}
+
+function getNewSession() {
+
+    return axios.get('chat/session/new');
 
 }
 
@@ -20,18 +26,19 @@ function getLastChatMessages() {
 }
 
 
-function postMessage(message, history_id) {
+function postMessage(message, session_id) {
 
     return axios.post('chat/', {
-        history_id: history_id,
+        session_id: session_id,
         message: message,
     });
 
 }
 
 export {
-    getHistory,
+    getSession,
     getChatMessages,
     postMessage,
-    getLastChatMessages
+    getLastChatMessages,
+    getNewSession
 };
