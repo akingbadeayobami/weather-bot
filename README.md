@@ -23,7 +23,7 @@ Rename `.env.default` to `.env` and get your API tokens
 npm run dev
 ```
 
-###### To run the server test
+###### To run the test
 ```
-npm run test-server
+npm run test
 ```
