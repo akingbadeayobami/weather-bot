@@ -10,12 +10,12 @@ This project is built using
 -  Weatherbit - Weather API
 
 
-To install the project run
+###### To install the project run
 ```sh
 npm install
 ```
 
-To run the project
+###### To run the project
 
 Rename `.env.default` to `.env` and get your API tokens
 
@@ -23,7 +23,7 @@ Rename `.env.default` to `.env` and get your API tokens
 npm run dev
 ```
 
-To run the server test
+###### To run the server test
 ```
 npm run test-server
 ```

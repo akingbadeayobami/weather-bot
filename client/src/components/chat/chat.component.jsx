@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { postMessage, getNewSession } from "../../actions/chat.actions";
 import { messageByConstants } from "../../constants";
-import MyMessage from "./my.message.component";
-import BotMessage from "./bot.message.component";
+import MyMessage from "./messages/my/my.message.component";
+import BotMessage from "./messages/bot/bot.message.component";
 import { connect } from "react-redux";
 
 class Chat extends Component {
@@ -28,7 +28,7 @@ class Chat extends Component {
     sendMessage() {
 
         const message = this.refs.message.value;
- 
+
         this.props.postMessage(message, this.props.chat.session_id);
 
         this.refs.message.value = "";
@@ -42,8 +42,7 @@ class Chat extends Component {
                     <div className="panel panel-default">
                         <div className="panel-heading">
                             Chat
-                          
-                        </div>
+                          </div>
                         <div className="chat-body panel-body">
                             <ul className="chat">
 
@@ -64,25 +63,25 @@ class Chat extends Component {
                                 )}
 
                             </ul>
- 
-                            {(this.props.chat.loading) && (<div className="loader"  />) }
-                            
+
+                            {(this.props.chat.loading) && (<div className="loader" />)}
+
                             <div className="chatBottom"
                                 ref={(el) => { this.messagesEnd = el; }}>
                             </div>
                         </div>
                         <div className="panel-footer">
                             <form onSubmit={(e) => {
-                                    this.sendMessage()
-                                    e.preventDefault();
-                                }} >
-                            <div className="input-group">
-                                <input id="btn-input" type="text" className="form-control input-sm" ref="message" placeholder="Type your message here..." required/>
-                                <span className="input-group-btn">
-                                    <button className="btn btn-warning btn-sm" type="submit" id="btn-chat" >
-                                        Send</button>
-                                </span>
-                            </div>
+                                this.sendMessage()
+                                e.preventDefault();
+                            }} >
+                                <div className="input-group">
+                                    <input id="btn-input" type="text" className="form-control input-sm" ref="message" placeholder="Type your message here..." required />
+                                    <span className="input-group-btn">
+                                        <button className="btn btn-warning btn-sm" type="submit" id="btn-chat" >
+                                            Send</button>
+                                    </span>
+                                </div>
                             </form>
                         </div>
                     </div>

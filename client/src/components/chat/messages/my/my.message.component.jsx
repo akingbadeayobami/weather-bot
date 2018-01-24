@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {dateFormat} from '../../utils';
+import {dateFormat} from '../../../../utils';
 import PropTypes from 'prop-types';
 
 class MyMessageBox extends Component {

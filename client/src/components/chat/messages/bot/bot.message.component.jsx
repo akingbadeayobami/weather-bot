@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {dateFormat} from '../../utils';
+import {dateFormat} from '../../../../utils';
 import PropTypes from 'prop-types';
 
 
@@ -20,9 +20,7 @@ class BotMessageBox extends Component {
                         <strong className="primary-font">Bot</strong> <small className="pull-right text-muted">
                             <span className="glyphicon glyphicon-time"></span>{dateFormat(created_at)}</small>
                     </div>
-                    <p>
-                        {message}
-                    </p>
+                    <p>{message}</p>
                 </div>
             </li>
         )
