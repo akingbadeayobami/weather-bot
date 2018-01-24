@@ -5,7 +5,7 @@ import MyMessage from "./messages/my/my.message.component";
 import BotMessage from "./messages/bot/bot.message.component";
 import { connect } from "react-redux";
 
-class Chat extends Component {
+export class Chat extends Component {
 
     componentWillMount() {
 

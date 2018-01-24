@@ -4,7 +4,7 @@ import { getAllSession } from "../../actions/session.actions";
 import { getSessionMessages } from "../../actions/chat.actions"; 
 import {dateFormat} from '../../utils';
 
-class Session extends Component {
+export class Session extends Component {
 
     componentWillMount() {
 
