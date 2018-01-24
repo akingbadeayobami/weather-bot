@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { getAllSession } from "../../actions/session.actions";
 import { getSessionMessages } from "../../actions/chat.actions"; 
-import {date_format} from '../../utils';
+import {dateFormat} from '../../utils';
 
 class Session extends Component {
 
@@ -32,7 +32,7 @@ class Session extends Component {
                                     this.props.session.session.map(chat => 
                                         <li key={chat._id}>
                                             <a  onClick={this.getSessionMessages.bind(this,chat.session_id)} >
-                                                <strong><p>{date_format(chat.created_at)}</p></strong>
+                                                <strong><p>{dateFormat(chat.created_at)}</p></strong>
                                                 <p className="one-line"> {chat.message} </p>
                                             </a>
                                         </li>

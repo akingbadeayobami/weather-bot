@@ -10,7 +10,7 @@ const Promise = require('bluebird');
 
 describe("Chat Route", function() {
 
-    before(function(done) {
+    beforeEach(function(done) {
 
         Chat.remove({}).exec().then(() => {
 
@@ -32,8 +32,7 @@ describe("Chat Route", function() {
 
     });
 
-    after(function(done) {
-
+    afterEach(function(done) {
         Chat.remove({}).exec().then(() => {
             done();
         });

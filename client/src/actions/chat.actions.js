@@ -1,6 +1,6 @@
 const { chatConstants, messageByConstants } = require("../constants");
 const chatServices = require("../services/chat.services");
-const { random_id } = require("../utils");
+const { randomId } = require("../utils");
 
 
 /**
@@ -62,7 +62,7 @@ const postMessage = (message, session_id) => {
         dispatch({
             type: chatConstants.POST_USER_MESSAGE,
             payload: {
-                _id: random_id(),
+                _id: randomId(),
                 message: message,
                 session_id: session_id,
                 message_by: messageByConstants.USER,
@@ -75,7 +75,7 @@ const postMessage = (message, session_id) => {
             dispatch({
                 type: chatConstants.POST_BOT_MESSAGE,
                 payload: {
-                    _id: random_id(),
+                    _id: randomId(),
                     message: response.data.message,
                     session_id: session_id,
                     message_by: messageByConstants.BOT,
