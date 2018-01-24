@@ -13,7 +13,7 @@ const session = (state = initial, action) => {
     }
 
     // Update Session's Last Message On New Message
-    if (action.type === chatConstants.POST_BOT_MESSAGE || action.type === chatConstants.POST_USER_MESSAGE) {
+    if (action.type === chatConstants.POST_BOT_MESSAGE || action.type === chatConstants.POST_USER_MESSAGE || action.type === chatConstants.NEW_CHAT_SESSION) {
 
         const newMessage = action.payload;
 

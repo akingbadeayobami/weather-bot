@@ -39,6 +39,14 @@ describe("Chat Route", function() {
 
     });
 
+    after(function(done) {
+        Chat.remove({}).exec().then(() => {
+            done();
+        });
+
+    });
+
+
     it("should get all sessions and their last message", function(done) {
         request(app).get('/api/chat/session/all')
             .end(function(err, response) {
@@ -54,15 +62,16 @@ describe("Chat Route", function() {
             });
     });
 
-    it("should get new session id greater by one than the last session id", function(done) {
+    it("should get new session id greater by one than the last session id with a welcome messages", function(done) {
 
         request(app).get('/api/chat/session/new')
             .end(function(err, response) {
                 expect(response.statusCode).to.equal(200);
 
                 const session = response.body;
-
                 expect(session.session_id).to.be.equal(3);
+                expect(session.message).to.be.equal('Hi! Welcome to an interactive weather bot. May I know your name?');
+
                 done();
 
             });
@@ -109,7 +118,8 @@ describe("Chat Route", function() {
                     weather: {
                         description: "Clear"
                     },
-                    temp: '17'
+                    temp: '17',
+                    city_name: 'Lagos',
                 }]
             });
 
@@ -124,7 +134,7 @@ describe("Chat Route", function() {
                 const message = response.body;
 
                 expect(message.status).to.be.true;
-                expect(message.message).to.be.equal('The current weather in Lagos, NG is Clear with a temperature of 17C');
+                expect(message.message).to.be.equal('The current weather in Lagos is Clear with a temperature of 17C');
 
                 done();
 

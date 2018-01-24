@@ -13,7 +13,7 @@ const getSessionMessages = (session_id) => {
     return dispatch => {
         // dispatch to set the new session id
         dispatch({
-            type: chatConstants.NEW_CHAT_SESSION,
+            type: chatConstants.SET_CHAT_SESSION_ID,
             payload: {
                 session_id: session_id
             }
@@ -41,8 +41,9 @@ const getNewSession = () => {
             // dispatch to set the new sessionID
             dispatch({
                 type: chatConstants.NEW_CHAT_SESSION,
-                payload: response.data
+                payload: {...response.data, _id: randomId() }
             });
+
         });
     };
 

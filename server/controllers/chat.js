@@ -87,17 +87,44 @@ const chatController = {
 
         Chat.findOne().sort('-session_id').exec().then(chat => {
 
-            let session_id;
+            const defaultMessage = 'Hi! Welcome to an interactive weather bot. May I know your name?';
+
+            let newChatMessage = {
+                message: defaultMessage,
+                message_by: messageBy.BOT.value
+            };
 
             if (!chat) {
-                session_id = 1;
-            } else {
-                session_id = chat.session_id + 1;
-            }
 
-            res.status(200).send({
-                session_id: session_id
-            });
+                newChatMessage = Object.assign(newChatMessage, { session_id: 1 });
+
+                Chat.create(newChatMessage);
+
+                return res.status(200).send(newChatMessage);
+
+            } else {
+
+                Chat.findOne({ session_id: chat.session_id }).sort('-_id').exec().then(lastChat => {
+
+                    if (lastChat.message == defaultMessage) {
+
+                        newChatMessage = Object.assign(newChatMessage, { session_id: chat.session_id });
+
+                    } else {
+
+                        newChatMessage = Object.assign(newChatMessage, { session_id: chat.session_id + 1 });
+
+                        Chat.create(newChatMessage);
+
+                    }
+
+                    res.status(200).send(newChatMessage);
+
+                });
+
+
+
+            }
 
         }).catch(err => {
             if (err) return next(err);

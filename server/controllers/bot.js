@@ -29,9 +29,20 @@ const botController = {
 
                     const intent = data.entities;
 
-                    // console.log(intent);
+                    /*
+                     Greeting Intent
+                    */
+                    if (intent.contact) {
 
-                    // making sure we have a location intent
+                        const name = intent.contact[0].value;
+
+                        return resolve(`Hi! ${name}. How may I help you?`);
+
+                    }
+
+                    /*
+                     Weather Intent
+                    */
                     if (intent.location && intent.location.length > 0) {
 
                         let location = intent.location[0].value;

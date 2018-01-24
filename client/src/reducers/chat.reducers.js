@@ -39,14 +39,21 @@ const chat = (state = initial, action) => {
     // Clear All Chat Messages And Update The New Session ID
     if (action.type === chatConstants.NEW_CHAT_SESSION) {
 
+
         return {
             ...state,
-            chat: [],
+            chat: [action.payload],
             session_id: action.payload.session_id
         }
 
     }
 
+    if (action.type === chatConstants.SET_CHAT_SESSION_ID) {
+        return {
+            ...state,
+            session_id: action.payload.session_id
+        }
+    }
     return state;
 
 };

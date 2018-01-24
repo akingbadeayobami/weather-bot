@@ -29,7 +29,7 @@ export class Session extends Component {
                             <ul className="session">
 
                                 {
-                                    this.props.session.session.map(chat => 
+                                    this.props.session.session.reverse().map(chat => 
                                         <li key={chat._id}>
                                             <a  onClick={this.getSessionMessages.bind(this,chat.session_id)} >
                                                 <strong><p>{dateFormat(chat.created_at)}</p></strong>
