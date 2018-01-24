@@ -25,19 +25,33 @@ const botController = {
                 .then((data) => {
 
                     // Setting Default Location
-                    let location = "Lagos,NG";
+                    let filter;
 
                     const intent = data.entities;
 
-                    // making sure we have a location intent
-                    if (intent.location.length > 0) {
+                    // console.log(intent);
 
-                        location = intent.location[0].value;
+                    // making sure we have a location intent
+                    if (intent.location && intent.location.length > 0) {
+
+                        let location = intent.location[0].value;
+
+                        if (location.name) {
+
+                            let location = location.name;
+
+                        }
+
+                        filter = `city=${location}`;
+
+                    } else {
+
+                        filter = 'ip=auto'
 
                     }
 
                     // Make a request to a weather api
-                    request(`https://api.weatherbit.io/v2.0/current?city=${location}&key=${config.weather_bit_api_key}`, { json: true }, (err, res, body) => {
+                    request(`https://api.weatherbit.io/v2.0/current?${filter}&key=${config.weather_bit_api_key}`, { json: true }, (err, res, body) => {
 
                         if (err) { return reject(err); }
 
@@ -47,8 +61,12 @@ const botController = {
                         if (body && body.data.length > 0) {
 
                             const weatherData = body.data[0];
+
+                            console.log(weatherData);
+
                             const weather = weatherData.weather.description;
                             const temperature = weatherData.temp;
+                            const location = weatherData.city_name;
 
                             weatherResponse = `The current weather in ${location} is ${weather} with a temperature of ${temperature}C`;
 

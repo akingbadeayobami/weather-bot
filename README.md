@@ -1,5 +1,5 @@
 # Weather Bot
-> An Awesome weather bot
+> An Interactive weather bot
 
 This project is built using
 
