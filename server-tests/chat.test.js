@@ -70,7 +70,7 @@ describe("Chat Route", function() {
 
                 const session = response.body;
                 expect(session.session_id).to.be.equal(3);
-                expect(session.message).to.be.equal('Hi! Welcome to an interactive weather bot. May I know your name?');
+                expect(session.message).to.be.equal('Hi! I am Sophia, I am an interactive weather bot. May I know your name?');
 
                 done();
 

@@ -79,6 +79,7 @@ const botController = {
                             const temperature = weatherData.temp;
                             const location = weatherData.city_name;
 
+                            // weatherResponse = `${location}'s weather has ${weather} with a temperature of ${temperature}C`;
                             weatherResponse = `The current weather in ${location} is ${weather} with a temperature of ${temperature}C`;
 
                         } else {

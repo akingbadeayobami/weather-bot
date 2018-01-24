@@ -13,7 +13,7 @@ class BotMessageBox extends Component {
         return (
 
             <li className="left clearfix"><span className="chat-img pull-left">
-                <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" className="img-circle" />
+                <img src="http://placehold.it/50/55C1E7/fff&text=B" alt="User Avatar" className="img-circle" />
             </span>
                 <div className="chat-body clearfix">
                     <div className="header">

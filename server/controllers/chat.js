@@ -87,7 +87,7 @@ const chatController = {
 
         Chat.findOne().sort('-session_id').exec().then(chat => {
 
-            const defaultMessage = 'Hi! Welcome to an interactive weather bot. May I know your name?';
+            const defaultMessage = 'Hi! I am Sophia, I am an interactive weather bot. May I know your name?';
 
             let newChatMessage = {
                 message: defaultMessage,
